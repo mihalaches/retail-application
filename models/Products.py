@@ -2,5 +2,5 @@ from db.DbHandle import DbHandle
 
 class Products:
 
-    def __init__(self,first_name,last_name,age,email,password,registerd_date):
+    def __init__(self,product_name,product_category,product_price,guaranty,product_details,product_image):
         pass
