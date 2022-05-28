@@ -1,15 +1,61 @@
 <!DOCTYPE html>
+
 <head>
     <title>TEST TEMPLATE</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
+    <style>
+        body {
+            background-image: url('/static/picture2.jpg');
+            width: auto;
+            height: auto;
+        }
+
+        .card {
+            background-color: #b1cae2;
+            border-radius: 5%;
+            opacity: 90%;
+        }
+    </style>
 </head>
+
 <body>
-    SAL FROM TEST TEMPLATE {{data}}
-    <form method="POST">
-        <input type="text" name="name"><br>
-        <input type="text" name="lname">
-        <input type="submit">
-    </form>
-    POZA: <br>
-    <img src="/static/produs1.jfif" width="150" height="150"></img>
+    <br /> <br />
+    <div class="container">
+        <div class="card col-sm-6 mx-auto">
+            <div class="card-header text-center">
+                User Registration Form
+            </div>
+            <br /> <br />
+            <form method="post" action='/register'>
+                <input class="form-control" id="email" name="email" type="email" size="40" required
+                    placeholder="Enter E-mail!" />
+                <br> <br>
+                <input class="form-control" id="password" name="password" type="password" size="40" required
+                    placeholder="Enter Password!" />
+                <br> <br>
+                <input class="form-control" id="confirm_password" name="confirm_password" type="password" size="40"
+                    required placeholder="Confirm password!" />
+                <br> <br>
+                <input class="form-control" id="first_name" name="first_name" type="text" size="40" required
+                    placeholder="Enter your first name!" />
+                <br><br>
+                <input class="form-control" id="last_name" name="last_name" type="text" size="40" required
+                    placeholder="Enter your last name!" />
+                <br /> <br />
+                <input class="form-control" id="phone_number" name="phone_number" type="phone" size="40" required
+                    placeholder="Enter your phone number!" />
+                <br /> <br />
+                <input class="form-control" id="country" name="country" type="text" size="40" required
+                    placeholder="Enter your country!" />
+                <br /> <br />
+                <div class="text-center">
+                    <input class="btn btn-primary " type="submit" value="Register">
+                </div>
+                <br /> <br />
+            </form>
+        </div>
+
+    </div>
 
 </body>

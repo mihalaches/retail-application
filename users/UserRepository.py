@@ -24,7 +24,7 @@ class UserRepository:
                     first_name,
                     last_name,
                     password,
-                    registerd_date,
+                    registered_date,
                     country,
                     phone_number,
                     vat
@@ -49,6 +49,7 @@ class UserRepository:
             data_fetch = self.cursor.fetchone()
             self.cursor.execute(query_deposit,(data_fetch['cid'],0,datetime.now()))
         except Exception as ex:
+            print(ex.args)
             return None
         self.dbh.do_commit()
         return data_fetch
