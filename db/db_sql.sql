@@ -13,7 +13,7 @@ CREATE TABLE "customers" (
   "first_name" varchar(255) NOT NULL,
   "last_name" varchar(255) NOT NULL,
   "password" varchar(255) NOT NULL,
-  "registerd_date" date NOT NULL,
+  "registered_date" date NOT NULL,
   "country" varchar(255) NOT NULL,
   "phone_number" varchar(255) NOT NULL,
   "vat" decimal NOT NULL
