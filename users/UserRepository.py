@@ -13,7 +13,7 @@ class UserRepository:
         query = "SELECT * FROM customers INNER JOIN deposit ON deposit.user_cid = customers.cid"
         self.cursor.execute(query)
         data_fetch = self.cursor.fetchall()
-        return self.cursor.fetchall()
+        return data_fetch
 
     def add_user(self,email,first_name,last_name,password,country,phone_number):
         query = """
