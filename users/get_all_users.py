@@ -8,7 +8,8 @@ def get_all_users():
     print(session)
     user_repository = UserRepository()
     all_users = user_repository.get_all_users()
+    print(all_users)
     if request.args.get("id"):
         specific_user = user_repository.get_user_by_id(request.args.get("id"))
-        return jsonify([{"id":specific_user[0],"name" : specific_user[1], "last_name" : specific_user[2]}])
-    return jsonify([{"id":obj_data[0],"name" : obj_data[1], "last_name" : obj_data[2]} for obj_data in all_users])
+        return jsonify([{"id":specific_user['cid'],"name" : specific_user['first_name'], "last_name" : specific_user['last_name']}])
+    return jsonify([{"cid":obj_data['cid'],"name" : obj_data['first_name'], "last_name" : obj_data['last_name']} for obj_data in all_users])

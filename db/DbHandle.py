@@ -1,5 +1,6 @@
 import os
 import psycopg2
+import psycopg2.extras
 
 from dotenv import find_dotenv, load_dotenv
 
@@ -15,7 +16,7 @@ class DbHandle:
             password=os.environ.get("PASSWORD"),
             port = os.environ.get("PORT")
         )
-        self.cursor = self.connection.cursor()
+        self.cursor = self.connection.cursor(cursor_factory = psycopg2.extras.RealDictCursor)
 
     def get_cursor(self):
         return self.cursor
