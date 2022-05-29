@@ -51,7 +51,7 @@ class UserRepository:
         hash_pwd = bcrypt.hashpw(password.encode("utf-8"),bcrypt.gensalt())
         vat = 19.0
         try:
-            self.cursor.execute(query,(email,1,first_name,last_name,hash_pwd,datetime.now(),country,phone_number,vat))
+            self.cursor.execute(query,(email,2,first_name,last_name,hash_pwd,datetime.now(),country,phone_number,vat))
             data_fetch = self.cursor.fetchone()
             self.cursor.execute(query_deposit,(data_fetch['cid'],0,datetime.now()))
         except Exception as ex:
