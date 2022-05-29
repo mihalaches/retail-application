@@ -10,10 +10,16 @@ class UserRepository:
         self.cursor = self.dbh.get_cursor()
 
     def get_all_users(self):
-        query = "SELECT * FROM customers INNER JOIN deposit ON deposit.user_cid = customers.cid"
+        query = "SELECT * FROM customers INNER JOIN deposit ON deposit.user_cid = customers.cid INNER JOIN roles ON customers.role = roles.id"
         self.cursor.execute(query)
         data_fetch = self.cursor.fetchall()
-        return data_fetch
+        list_users = []
+        for element in data_fetch:
+            list_users.append(Users(element['cid'],element['email'],element['role_name'],element['first_name'],element['last_name'],
+            element['password'],element['registered_date'],
+            element['country'],element['phone_number'], element['vat'],element['amount']))
+        print(list_users)
+        return list_users
 
     def add_user(self,email,first_name,last_name,password,country,phone_number):
         query = """

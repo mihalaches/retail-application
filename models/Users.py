@@ -101,7 +101,27 @@ class Users:
 
     @deposit.setter
     def deposit(self,deposit):
-        self._deposit = deposit                            
+        self._deposit = deposit
+    
+    def __str__(self) -> str:
+        return "User cid : {}".format(self.cid)
+
+    def __repr__(self) -> str:
+        return "User cid : {}".format(self.cid)
+
+    def serialize(self):
+        return {
+            "cid" : self.cid,
+            "email" : self.email,
+            "role" : self.role,
+            "first_name" : self.first_name,
+            "last_name" : self.last_name,
+            "registered_date" : self.registered_date,
+            "country" : self.country,
+            "phone_number" : self.phone_number,
+            "vat" : self.vat,
+            "deposit" : self.deposit
+        }                            
 
 
     

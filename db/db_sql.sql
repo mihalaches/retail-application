@@ -13,7 +13,7 @@ CREATE TABLE "customers" (
   "first_name" varchar(255) NOT NULL,
   "last_name" varchar(255) NOT NULL,
   "password" varchar(255) NOT NULL,
-  "registered_date" date NOT NULL,
+  "registered_date" timestamp NOT NULL,
   "country" varchar(255) NOT NULL,
   "phone_number" varchar(255) NOT NULL,
   "vat" decimal NOT NULL
@@ -23,7 +23,7 @@ CREATE TABLE "deposit" (
   "id" SERIAL PRIMARY KEY,
   "user_cid" int UNIQUE NOT NULL,
   "amount" decimal NOT NULL,
-  "sync_date" date NOT NULL
+  "sync_date" timestamp NOT NULL
 );
 
 CREATE TABLE "customers_address" (
@@ -40,7 +40,7 @@ CREATE TABLE "products" (
   "product_name" varchar(255) NOT NULL,
   "product_category" int NOT NULL,
   "product_price" decimal NOT NULL,
-  "guaranty" date NOT NULL,
+  "guaranty" timestamp NOT NULL,
   "product_details" varchar(255) NOT NULL,
   "product_image" varchar(500) NOT NULL
 );
