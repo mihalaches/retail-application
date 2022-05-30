@@ -1,3 +1,4 @@
+from tkinter import N
 from db.DbHandle import DbHandle
 import bcrypt
 from datetime import datetime
@@ -61,6 +62,11 @@ class UserRepository:
         return data_fetch
 
     def get_user_by_id(self,user_id):
-        query = "SELECT * FROM customers WHERE cid = %s"
+        query = "SELECT * FROM customers INNER JOIN deposit ON deposit.user_cid = customers.cid INNER JOIN roles ON customers.role = roles.id WHERE customers.cid = %s"
         self.cursor.execute(query,(user_id,))
-        return self.cursor.fetchone()
+        data_fetch = self.cursor.fetchone()
+        if data_fetch:
+            return Users(data_fetch['cid'],data_fetch['email'],data_fetch['role_name'],data_fetch['first_name'],
+                    data_fetch['last_name'],data_fetch['password'],data_fetch['registered_date'],data_fetch['country'],
+                    data_fetch['phone_number'], data_fetch['vat'],data_fetch['amount'])
+        return None

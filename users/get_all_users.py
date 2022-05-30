@@ -1,13 +1,20 @@
+import imp
 from application.app import app
 from users.UserRepository import UserRepository
 from flask import jsonify, request, session
+from libs.token import check_auth
+
 
 @app.route("/allusers",methods = ["POST","GET"])
-def get_all_users():
+@check_auth
+def get_all_users(user):
     session['test'] = "testvalue"
     user_repository = UserRepository()
     all_users = user_repository.get_all_users()
     if request.args.get("id"):
         specific_user = user_repository.get_user_by_id(request.args.get("id"))
-        return jsonify([{"id":specific_user['cid'],"name" : specific_user['first_name'], "last_name" : specific_user['last_name']}])
+        if specific_user:
+            return jsonify(specific_user.serialize())
+        else:
+            return jsonify({"message":"No user with that id!"}),404
     return jsonify([user.serialize() for user in all_users])
