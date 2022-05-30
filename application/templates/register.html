@@ -52,6 +52,23 @@
                 <div class="text-center">
                     <input class="btn btn-primary " type="submit" value="Register">
                 </div>
+                <br>
+                {% if not data.pass_match %}
+                <div class="alert alert-danger" role="alert">
+                    <center>{{data.message}}</center>
+                </div>
+                {% endif %}
+                {% if data.user_found %}
+                <div class="alert alert-success" role="alert">
+                    <center>{{data.message}}</center>
+                    <br><center>Go to <a href="/login">Login</a></center>
+                </div>
+                {% endif %}
+                {% if data.duplicate_email==False %}
+                <div class="alert alert-danger" role="alert">
+                    <center>{{data.message}}</center>
+                </div>
+                {% endif %}
                 <br /> <br />
             </form>
         </div>

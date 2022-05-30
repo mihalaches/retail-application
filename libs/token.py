@@ -1,5 +1,3 @@
-from ast import arg
-import imp
 import jwt
 from application.app import SECRET_KEY
 from libs.exceptions import InvalidToken
@@ -20,6 +18,7 @@ def check_auth(function):
             session.clear()
             return redirect(url_for('login'))
         decoded_token = jwt_token.decode(session['token'])
+        print(decoded_token)
         user_found = user_repo.get_user_by_id(decoded_token['cid'])
         if not user_found:
             return redirect(url_for('login')) 
