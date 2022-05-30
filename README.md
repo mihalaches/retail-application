@@ -18,3 +18,9 @@
 * pip install -r requirments.txt
 <br />
 * pip list
+
+
+
+# HOW TO START THE APP
+
+* RUN sh start_app.sh from \licenta_cristina\start_app.sh
