@@ -25,6 +25,15 @@ def check_auth(function):
         return function(user_found,*args,**kwargs)
     return wrapper
 
+def no_login_req(function):
+    @wraps(function)
+    def wrapper(*args,**kwargs):
+        print(session)
+        if session.get("token"):
+            return redirect(url_for("get_all_users"))
+        return function(*args,**kwargs)
+    return wrapper
+
 
 class jwt_token:
 

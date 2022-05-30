@@ -10,3 +10,4 @@ from users.register import register
 from users.get_all_users import get_all_users
 from users.add_new_user import add_new_user
 from users.login import login
+from users.logout import logout

@@ -1,7 +1,24 @@
 <!DOCTYPE html>
 <head>
     <title>Login</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
 </head>
 <body>
-    Sal
+    <form method="POST">
+        <input type="text" name="email"><br>
+        <input type="password" name="password">
+        <br>
+        <input type="submit">
+        {% if data.invalid_password==True %}
+        <div class="alert alert-danger" role="alert">
+            <center>{{data.message}}</center>
+        </div>
+        {% endif %}
+        {% if data.invalid_email==True %}
+        <div class="alert alert-danger" role="alert">
+            <center>{{data.message}}</center>
+        </div>
+        {% endif %}
+    </form>
 </body>

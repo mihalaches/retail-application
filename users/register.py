@@ -3,8 +3,10 @@ from application.app import app
 from flask import redirect,render_template,request
 from users.UserRepository import UserRepository
 from libs.messages import Messages
+from libs.token import no_login_req
 
 @app.route("/register",methods = ["POST","GET"])
+@no_login_req
 def register():
     template = "register.html"
     user_repository = UserRepository()

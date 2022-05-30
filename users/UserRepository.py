@@ -49,7 +49,7 @@ class UserRepository:
                 )
                 VALUES(%s,%s,%s)
         """
-        hash_pwd = bcrypt.hashpw(password.encode("utf-8"),bcrypt.gensalt())
+        hash_pwd = bcrypt.hashpw(password.encode("utf-8"),bcrypt.gensalt()).decode("utf-8")
         vat = 19.0
         try:
             self.cursor.execute(query,(email,2,first_name,last_name,hash_pwd,datetime.now(),country,phone_number,vat))
@@ -64,6 +64,16 @@ class UserRepository:
     def get_user_by_id(self,user_id):
         query = "SELECT * FROM customers INNER JOIN deposit ON deposit.user_cid = customers.cid INNER JOIN roles ON customers.role = roles.id WHERE customers.cid = %s"
         self.cursor.execute(query,(user_id,))
+        data_fetch = self.cursor.fetchone()
+        if data_fetch:
+            return Users(data_fetch['cid'],data_fetch['email'],data_fetch['role_name'],data_fetch['first_name'],
+                    data_fetch['last_name'],data_fetch['password'],data_fetch['registered_date'],data_fetch['country'],
+                    data_fetch['phone_number'], data_fetch['vat'],data_fetch['amount'])
+        return None
+
+    def get_user(self,param,value):
+        query = "SELECT * FROM customers INNER JOIN deposit ON deposit.user_cid = customers.cid INNER JOIN roles ON customers.role = roles.id WHERE customers.{} = %s".format(param)
+        self.cursor.execute(query,(value,))
         data_fetch = self.cursor.fetchone()
         if data_fetch:
             return Users(data_fetch['cid'],data_fetch['email'],data_fetch['role_name'],data_fetch['first_name'],

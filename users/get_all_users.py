@@ -8,6 +8,7 @@ from libs.token import check_auth
 @app.route("/allusers",methods = ["POST","GET"])
 @check_auth
 def get_all_users(user):
+    print(request.headers)
     session['test'] = "testvalue"
     user_repository = UserRepository()
     all_users = user_repository.get_all_users()

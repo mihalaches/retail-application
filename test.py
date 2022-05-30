@@ -13,5 +13,5 @@ import bcrypt
 
 hash_pasw = bcrypt.hashpw("asd123".encode("utf-8"),bcrypt.gensalt())
 "b'$2b$12$eQvsx75jxb3pu4Duy1cUQOfRBgmRY5jd/fvlfmZNd6Zbh1gkkOkFu'"
-print(hash_pasw)
+print(hash_pasw.decode("utf-8"))
 print(bcrypt.checkpw("asd123".encode("utf-8"),hashed_password = hash_pasw))
