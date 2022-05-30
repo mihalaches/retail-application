@@ -1,0 +1,6 @@
+@echo off
+echo Activating venv...
+call .\venv\Scripts\activate
+echo Running app...
+python app.py
+cmd \k
