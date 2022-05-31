@@ -57,19 +57,24 @@
                 <div class="alert alert-danger" role="alert">
                     <center>{{data.message}}</center>
                 </div>
+                <br />
                 {% endif %}
                 {% if data.user_found %}
                 <div class="alert alert-success" role="alert">
                     <center>{{data.message}}</center>
-                    <br><center>Go to <a href="/login">Login</a></center>
+                    <br>
+                    <center>Go to <a href="/login">Login</a></center>
                 </div>
+                <br />
                 {% endif %}
                 {% if data.duplicate_email==False %}
                 <div class="alert alert-danger" role="alert">
                     <center>{{data.message}}</center>
                 </div>
+                <br />
                 {% endif %}
-                <br /> <br />
+                <p align="center">Do you already have an account?</p>
+                <p align="center">Please <a href="/login"><b>Sign In</b></a> !</p>
             </form>
         </div>
 
