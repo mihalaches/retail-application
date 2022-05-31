@@ -8,7 +8,6 @@ load_dotenv(find_dotenv())
 class DbHandle:
 
     def __init__(self):
-        print(os.environ.get("HOST_NAME"))
         self.connection = psycopg2.connect(
             host=os.environ.get("HOST_NAME"),
             database=os.environ.get("DB_NAME"),
