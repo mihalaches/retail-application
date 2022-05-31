@@ -116,15 +116,27 @@
         <form method="POST" class="form-horizontal">
 
 
-            <input type=text name="email" autofocus="autofocus" placeholder="Username">
-            <input type=password name="password" placeholder="Password">
+            <input type="email" name="email" autofocus="autofocus" placeholder="Username" required>
+            <input type="password" name="password" placeholder="Password" required>
+            {% if data.invalid_password==True %}
+            <div role="alert">
+                <center style="color: red;">{{data.message}}</center>
+            </div>
+            <br />
+            {% endif %}
+            {% if data.invalid_email==True %}
+            <div role="alert">
+                <center style="color: red;">{{data.message}}</center>
+            </div>
+            <br />
+            {% endif %}
             <input type="submit" value="Login">
         </form>
 
         <p>forgot your password? <a href="#">Reset password</a></p>
 
 
-        <p class="button-text">Don't have an accout? <a href="#">Sign up</a></p>
+        <p class="button-text">Don't have an accout? <a href="/register">Sign up</a></p>
     </section>
 
 </body>
