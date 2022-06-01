@@ -1,0 +1,30 @@
+.object {
+    margin-top: 20px;
+    margin-left: 20px;
+    width: 10%;
+    height: 30%;
+    border-style: solid;
+    border-color: black;
+    display: inline-table;
+    max-width: 10%;
+    max-height: 30%;
+}
+
+.object_form {
+    display: inline-table;
+}
+
+.img_div {
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    border-style: solid;
+    border-color: black;
+    display: inline-table;
+    max-width:100%;
+    max-height:100%;
+    height: auto;
+    width:auto;
+    border-radius: 10px;
+}

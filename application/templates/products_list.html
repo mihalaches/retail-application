@@ -1,0 +1,43 @@
+{% extends "base_template.html" %}
+{% block content %}
+<html>
+
+<head>
+    <title>Product list</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/product_list.css') }}">
+</head>
+
+<body>
+    Sort by:
+    <br>
+        {% for index in range(200) %}
+        <form method="POST" class="object_form">
+        <div class="object">
+            <div style="text-align: center; margin: 5px; border: solid 1px black;">
+                <b>Product category :</b> <a href="" class="badge badge-info mr-4"> addsa</a>
+                <br>
+                <b>Product name :</b> <span class="badge badge-info mr-4"> Surub</span></center>
+                <br>
+                <b>Guaranty : </b><span class="badge badge-info mr-4"> 1 year</span></center>
+
+            </div>
+            <div class="img_div">
+                <img src="https://www.sculesiechipamente.ro/pub/media/catalog/product/cache/0945f9061143e8c596abd86227b70a69/s/u/suruburi_cap_hexagonal_din_933_3_ujphwmaxiujvzmme.jpg"
+                    width="300px" height="200">
+            </div>
+            <center> Price : <span class="badge badge-danger mr-4"> 19.99$</span></center>
+            <br>
+            <p style="text-align:center;">Quantity:<input type="number" value="0" style="width: 20%;" min="0" name="quantity"></p>
+            <div style="margin-left: 10px; text-align: center; margin-bottom: 10px;">
+                <input type="submit" class="btn btn-primary" value="Add to cart" name="add_product"></button>
+                <input type="submit" class="btn btn-primary" value="View product info" name="view_info"></button>
+                <input type="hidden" name="product_id" value="{{index}}">
+            </div>
+        </div>
+    </form>
+        {% endfor %}
+
+</body>
+
+</html>
+{% endblock %}

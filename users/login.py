@@ -19,7 +19,7 @@ def login():
             check_pass = bcrypt.checkpw(password.encode("utf-8"),user.password.encode("utf-8"))
             if check_pass:
                 session['token'] = jwt_token.encode(cid=user.cid,email=user.email)
-                return redirect(url_for("get_all_users"))
+                return redirect(url_for("products_list"))
             return render_template(template,data = {"invalid_password":True,"message":Messages.INVALID_PASSWORD})
         return render_template(template,data = {"invalid_email":True,"message":Messages.INVALID_EMAIL})
     return render_template(template,data ="")
