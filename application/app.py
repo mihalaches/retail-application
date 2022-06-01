@@ -12,3 +12,4 @@ from users.add_new_user import add_new_user
 from users.login import login
 from users.logout import logout
 from products.products_list import products_list
+from products.test_product import test
