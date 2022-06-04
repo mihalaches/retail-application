@@ -1,7 +1,8 @@
 from db.DbHandle import DbHandle
 from models.Users import Users
 from models.Products import Products
-
+from datetime import datetime
+from uuid import uuid4
 
 class ProductRepository:
 
@@ -35,12 +36,14 @@ class ProductRepository:
             INSERT INTO
                 customers_orders(
                     user_cid,
-                    products
+                    products,
+                    active,
+                    inserted_date
                 )
-            VALUES(%s,%s)
+            VALUES(%s,%s,1,%s)
         """
         try:
-            self.cursor.execute(query, (cid, product_id))
+            self.cursor.execute(query, (cid, product_id,datetime.now()))
         except Exception as ex:
             print(ex.args)
             return False
@@ -49,8 +52,10 @@ class ProductRepository:
 
     def delete_from_cart(self, cart_p_id):
         query = """
-            DELETE FROM
+            UPDATE
                 customers_orders
+            SET
+                active = '0'
             WHERE
                 id = %s
         """
@@ -62,13 +67,28 @@ class ProductRepository:
         self.dbh.do_commit()
         return True
 
-    def delete_cart_products_by_cid(self, cid):
+    def delete_cart_products_by_cid(self, cid, ordered = None):
         query = """
-            DELETE FROM
+            UPDATE
                 customers_orders
+            SET
+                active = '0'
             WHERE
                 user_cid = %s
         """
+        if ordered:
+            query = """
+                UPDATE
+                    customers_orders
+                SET
+                    active = '0',
+                    ordered_date = '{order_date}',
+                    order_id = '{order_id}'
+                WHERE
+                    user_cid = %s
+                AND
+                    active = '1'
+            """.format(order_date = datetime.now(), order_id=str(uuid4()))
         try:
             self.cursor.execute(query, (cid,))
         except Exception as ex:

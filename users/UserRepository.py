@@ -67,7 +67,7 @@ class UserRepository:
         query = "SELECT * FROM customers INNER JOIN deposit ON deposit.user_cid = customers.cid INNER JOIN roles ON customers.role = roles.id WHERE customers.{} = %s".format(param)
         self.cursor.execute(query,(value,))
         data_fetch = self.cursor.fetchone()
-        query_orders = "SELECT id,products FROM customers_orders WHERE user_cid = %s"
+        query_orders = "SELECT id,products FROM customers_orders WHERE user_cid = %s AND active = '1'"
         list_products = []
         if data_fetch:
             self.cursor.execute(query_orders,(data_fetch['cid'],))

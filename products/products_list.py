@@ -1,9 +1,8 @@
-from math import prod
 from application.app import app
 from libs.token import check_auth
 from flask import redirect, render_template, request
 from products.ProductRepository import ProductRepository
-
+import random
 
 @app.route("/products", methods=["GET", "POST"])
 @check_auth

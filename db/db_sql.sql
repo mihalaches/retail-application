@@ -48,7 +48,11 @@ CREATE TABLE "products" (
 CREATE TABLE "customers_orders" (
   "id" SERIAL PRIMARY KEY,
   "user_cid" int NOT NULL,
-  "products" int NOT NULL
+  "products" int NOT NULL,
+  "active" int NOT NULL,
+  "inserted_date" timestamp NOT NULL,
+  "ordered_date" timestamp default NULL,
+  "order_id" varchar(255) default NULL
 );
 
 CREATE TABLE "products_category" (
