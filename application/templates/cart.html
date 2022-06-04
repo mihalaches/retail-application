@@ -1,0 +1,59 @@
+{% extends "base_template.html" %}
+{% block content %}
+
+<head>
+    <style>
+        th,
+        td {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+
+<body>
+    <center>
+        <table>
+            <thead>
+                <th>Options</th>
+                <th>Product name</th>
+                <th>Product category</th>
+                <th>Product price</th>
+                <th>Product guaranty</th>
+                <th>Image</th>
+            </thead>
+            {% for element in user.cart %}
+            <form method="POST">
+                <tbody>
+                    <td> <button type="submit" class="btn btn-danger" value="{{element.cart_product_id}}"
+                            name="remove"><i class="icon-shopping-cart"></i> Remove</button></td>
+                    <td>{{element.product_name}}</td>
+                    <td>{{element.product_category}}</td>
+                    <td>{{element.product_price}}$</td>
+                    <td>{{element.guaranty}}</td>
+                    <td><img src="{{element.product_image}}" width="65" height="65"></td>
+                </tbody>
+            </form>
+            {% endfor %}
+            <tbody>
+                <td>Total cart:</td>
+                <td></td>
+                <td>{{total_price}}$</td>
+                <td></td>
+                <form method="POST">
+                    <td><button type="submit" class="btn btn-primary" name="send_order"><i
+                                class="icon-shopping-cart"></i> Send order</button></td>
+                </form>
+            </tbody>
+        </table>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <ul class=flashes>
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
+    </center>
+</body>
+{% endblock %}

@@ -21,8 +21,8 @@
         <ul class="navbar-nav mr-auto">
         </ul>
         <span class="badge badge-danger mr-4"></i>Account balance: {{user.deposit}} $</span>
-        <a href="" class="badge badge-primary mr-4">
-            <i class="icon-shopping-cart"></i> Cart <span class="badge bg-secondary">0</span>
+        <a href="/cart" class="badge badge-primary mr-4">
+            <i class="icon-shopping-cart"></i> Cart <span class="badge bg-secondary">{{user.cart|length}}</span>
           </a>
         <span class="badge badge-primary mr-4"></i>Welcome {{user.first_name}} {{user.last_name}}</span>
         <a href="/logout"><span class="badge badge-danger">Log out</span></a>

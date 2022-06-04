@@ -18,7 +18,7 @@ def check_auth(function):
             session.clear()
             return redirect(url_for('login'))
         decoded_token = jwt_token.decode(session['token'])
-        user_found = user_repo.get_user_by_id(decoded_token['cid'])
+        user_found = user_repo.get_user("cid",decoded_token['cid'])
         if not user_found:
             return redirect(url_for('login')) 
         return function(user_found,*args,**kwargs)
@@ -27,7 +27,12 @@ def check_auth(function):
 def no_login_req(function):
     @wraps(function)
     def wrapper(*args,**kwargs):
-        if session.get("token"):
+        try:
+            decoded_token = jwt_token.decode(session['token'])
+            user_found = user_repo.get_user("cid",decoded_token['cid'])
+        except:
+            user_found = None
+        if session.get("token") and user_found:
             return redirect(url_for("get_all_users"))
         return function(*args,**kwargs)
     return wrapper

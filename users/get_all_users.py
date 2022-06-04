@@ -12,7 +12,7 @@ def get_all_users(user):
     user_repository = UserRepository()
     all_users = user_repository.get_all_users()
     if request.args.get("id"):
-        specific_user = user_repository.get_user_by_id(request.args.get("id"))
+        specific_user = user_repository.get_user("cid",request.args.get("id"))
         if specific_user:
             return jsonify(specific_user.serialize())
         else:

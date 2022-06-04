@@ -1,8 +1,6 @@
-from db.DbHandle import DbHandle
-
 class Products:
 
-    def __init__(self,pid,product_name,product_category,product_price,guaranty,product_details,product_image):
+    def __init__(self,pid,product_name,product_category,product_price,guaranty,product_details,product_image,cart_product_id):
         self._pid = pid
         self._product_name = product_name
         self._product_category = product_category
@@ -10,6 +8,7 @@ class Products:
         self._guaranty = guaranty
         self._product_details = product_details
         self._product_image = product_image
+        self._cart_product_id = cart_product_id
 
     @property
     def pid(self):
@@ -65,7 +64,15 @@ class Products:
 
     @product_image.setter
     def product_image(self,product_image):
-        self._product_image = product_image                                                    
+        self._product_image = product_image 
+
+    @property
+    def cart_product_id(self):
+        return self._cart_product_id
+
+    @cart_product_id.setter
+    def cart_product_id(self,cart_product_id):
+        self._cart_product_id = cart_product_id                                                   
 
     def __str__(self) -> str:
         return "Product id : {}".format(self.pid)
@@ -81,5 +88,6 @@ class Products:
             "product_price" : self.product_price,
             "guaranty" : self.guaranty,
             "product_details" : self.product_details,
-            "product_image" : self.product_image
+            "product_image" : self.product_image,
+            "cart_product_id" : self.cart_product_id
         }    

@@ -1,8 +1,6 @@
-from db.DbHandle import DbHandle
-
 class Users:
 
-    def __init__(self,cid,email,role,first_name,last_name,password,registered_date,country,phone_number,vat,deposit):
+    def __init__(self,cid,email,role,first_name,last_name,password,registered_date,country,phone_number,vat,deposit,cart):
         self._cid = cid
         self._email = email
         self._role = role
@@ -14,6 +12,7 @@ class Users:
         self._phone_number = phone_number
         self._vat = vat
         self._deposit = deposit
+        self._cart = cart
 
     @property
     def cid(self):
@@ -103,6 +102,14 @@ class Users:
     def deposit(self,deposit):
         self._deposit = deposit
     
+    @property
+    def cart(self):
+        return self._cart
+
+    @cart.setter
+    def cart(self,cart):
+        self._cart = cart
+    
     def __str__(self) -> str:
         return "User cid : {}".format(self.cid)
 
@@ -120,7 +127,8 @@ class Users:
             "country" : self.country,
             "phone_number" : self.phone_number,
             "vat" : self.vat,
-            "deposit" : self.deposit
+            "deposit" : self.deposit,
+            "cart" : self.cart
         }                            
 
 
