@@ -18,6 +18,10 @@ def cart(user):
             cart_p_id = int(request.form['remove'])
             product_repo.delete_from_cart(cart_p_id)
             return redirect(request.url)
+        if 'empty_cart' in request.form:
+            product_repo.delete_cart_products_by_cid(user.cid)
+            flash(Messages.EMPTY_CART)
+            return redirect(request.url)
         if 'send_order' in request.form:
             if total_price > user.deposit:
                 flash(Messages.NO_MONEY_ACCOUNT) 

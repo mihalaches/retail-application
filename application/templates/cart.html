@@ -30,7 +30,7 @@
                     <td>{{element.product_category}}</td>
                     <td>{{element.product_price}}$</td>
                     <td>{{element.guaranty}}</td>
-                    <td><img src="{{element.product_image}}" width="65" height="65"></td>
+                    <td><img src="{{element.product_image}}" width="120" height="65"></td>
                 </tbody>
             </form>
             {% endfor %}
@@ -38,11 +38,15 @@
             <tbody>
                 <td>Total cart:</td>
                 <td></td>
-                <td>{{total_price}}$</td>
                 <td></td>
+                <td>{{total_price}}$</td>
                 <form method="POST">
                     <td><button type="submit" class="btn btn-primary" name="send_order"><i
                                 class="icon-shopping-cart"></i> Send order</button></td>
+                </form>
+                <form method="POST">
+                    <td><button type="submit" class="btn btn-danger" name="empty_cart"><i
+                                class="icon-shopping-cart"></i> Empty cart</button></td>
                 </form>
             </tbody>
             {% endif %}

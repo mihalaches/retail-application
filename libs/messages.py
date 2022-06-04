@@ -7,3 +7,4 @@ class Messages:
     INVALID_EMAIL = "Invalid email! Please try again!"
     NO_MONEY_ACCOUNT = "No money in the account! Please top up!"
     SUCCESS_ORDER = "Order sent! New deposit amount : {new_deposit_amount} $"
+    EMPTY_CART = "Your cart was deleted!"
