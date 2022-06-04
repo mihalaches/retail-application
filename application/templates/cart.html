@@ -34,6 +34,7 @@
                 </tbody>
             </form>
             {% endfor %}
+            {% if user.cart|length > 0 %}
             <tbody>
                 <td>Total cart:</td>
                 <td></td>
@@ -44,6 +45,7 @@
                                 class="icon-shopping-cart"></i> Send order</button></td>
                 </form>
             </tbody>
+            {% endif %}
         </table>
         {% with messages = get_flashed_messages() %}
         {% if messages %}

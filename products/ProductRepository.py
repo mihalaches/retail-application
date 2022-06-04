@@ -48,3 +48,18 @@ class ProductRepository:
             return False
         self.dbh.do_commit()
         return True
+
+    def delete_cart_products_by_cid(self,cid):
+        query = """
+            DELETE FROM
+                customers_orders
+            WHERE
+                user_cid = %s
+        """
+        try:
+            self.cursor.execute(query,(cid,))
+        except Exception as ex:
+            print(ex.args)
+            return False
+        self.dbh.do_commit()
+        return True

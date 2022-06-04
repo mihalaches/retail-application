@@ -79,3 +79,15 @@ class UserRepository:
                     data_fetch['last_name'],data_fetch['password'],data_fetch['registered_date'],data_fetch['country'],
                     data_fetch['phone_number'], data_fetch['vat'],data_fetch['amount'],list_products)
         return None
+
+    def update_deposit(self,cid,new_amount):
+        query = "UPDATE deposit SET amount = %s WHERE user_cid = %s"
+        try:
+            self.cursor.execute(query,(new_amount,cid))
+        except Exception as ex:
+            print(ex.args)
+            return False
+        self.dbh.do_commit()
+        print(cid,new_amount)
+        print("assdasdaasd")
+        return True

@@ -5,3 +5,5 @@ class Messages:
     DUPLICATE_EMAIL = "This email already exist! Please chose another email!"
     INVALID_PASSWORD = "Invalid password! Please try again!"
     INVALID_EMAIL = "Invalid email! Please try again!"
+    NO_MONEY_ACCOUNT = "No money in the account! Please top up!"
+    SUCCESS_ORDER = "Order sent! New deposit amount : {new_deposit_amount} $"
