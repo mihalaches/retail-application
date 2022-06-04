@@ -19,13 +19,15 @@
 </head>
 
 <body>
-    Sort by:
+    Sort by: {{sorty_by}}
     <br>
+    {% if products %}
     {% for product in products %}
     <form method="POST" class="object_form">
         <div class="object">
             <div style="text-align: center; margin: 5px; border: solid 1px black;">
-                <b>Product category :</b> <a href="/products?category={{product.product_category}}" class="badge badge-info mr-4"> {{product.product_category}} </a>
+                <b>Product category :</b> <a href="/products?category={{product.product_category}}"
+                    class="badge badge-info mr-4"> {{product.product_category}} </a>
                 <br>
                 <b>Product name :</b> <span class="badge badge-info mr-4"> {{product.product_name}} </span></center>
                 <br>
@@ -52,6 +54,7 @@
     </form>
     {% endfor %}
 
+    {% endif %}
     <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
         aria-hidden="true">
         <div class="modal-dialog modal-lg">
