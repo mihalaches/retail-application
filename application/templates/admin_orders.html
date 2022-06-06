@@ -15,6 +15,7 @@
         <table>
             <thead>
                 <th>Order id</th>
+                <th>Order date</th>
                 <th>Customer</th>
                 <th>Products</th>
                 <th>Product category</th>
@@ -26,7 +27,8 @@
             <form method="POST">
                 <tbody>
                     <td>{{order.order_id}}</td>
-                    <td>{{order.cid.first_name}} {{order.cid.last_name}}</td>
+                    <td>{{order.ordered_date}}</td>
+                    <td>{{order.user.first_name}} {{order.user.last_name}}</td>
                     <td>
                         {% for product in order.products %}
                         {{product.product_name}}<br>

@@ -7,7 +7,7 @@ from orders.OrdersRepository import OrdersRepository
 def view_orders():
     order_repo = OrdersRepository()
     all_orders = order_repo.get_all()
-    all_orders.sort(key = lambda x : x.order_id)
+    all_orders.sort(key = lambda x : x.ordered_date, reverse=True)
     orders_lengts = len(all_orders)
     start = 0
     step = 7
