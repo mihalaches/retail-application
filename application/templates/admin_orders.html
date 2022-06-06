@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        th,
+        td {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+
+<body>
+    <center>
+        <table>
+            <thead>
+                <th>Order id</th>
+                <th>Customer</th>
+                <th>Products</th>
+                <th>Product category</th>
+                <th>Product price</th>
+                <th>Product guaranty</th>
+                <th>Total order</th>
+            </thead>
+            {% for order in orders %}
+            <form method="POST">
+                <tbody>
+                    <td>{{order.order_id}}</td>
+                    <td>{{order.cid.first_name}} {{order.cid.last_name}}</td>
+                    <td>
+                        {% for product in order.products %}
+                        {{product.product_name}}<br>
+                        {% endfor %}
+                    </td>
+                    <td>
+                        {% for product in order.products %}
+                        {{product.product_category}}<br>
+                        {% endfor %}
+                    </td>
+                    <td>
+                        {% set total_value = namespace(value=0) %}
+                        {% for product in order.products %}
+                        {{product.product_price}}$<br>
+                        {% set total_value.value = total_value.value + product.product_price %}
+                        {% endfor %}
+                    </td>
+                    <td>
+                        {% for product in order.products %}
+                        {{product.guaranty}}<br>
+                        {% endfor %}
+                    </td>
+                    <td>{{total_value.value}}$</td>
+                </tbody>
+            </form>
+            {% endfor %}
+        </table>
+
+        {% for index in range(1,pages+1) %}
+        <a href="/admin/orders?page={{index}}">{{index}}</a>
+        {% endfor %}
+    </center>
+
+</body>
+
+</html>
