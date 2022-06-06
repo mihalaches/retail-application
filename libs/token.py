@@ -8,6 +8,25 @@ from users.UserRepository import UserRepository
 
 user_repo = UserRepository()
 
+
+def check_admin_auth(function):
+    @wraps(function)
+    def wrapper(*args,**kwargs):
+        if not session.get("token"):
+            session.clear()
+            return redirect(url_for('adminlogin'))
+        if not jwt_token.check_valability(session.get('token')):
+            session.clear()
+            return redirect(url_for('adminlogin'))
+        decoded_token = jwt_token.decode(session['token'])
+        user_found = user_repo.get_user("cid",decoded_token['cid'])
+        if not user_found:
+            return redirect(url_for('adminlogin')) 
+        if user_found.role != "ADMIN":
+            return redirect(url_for('adminlogin')) 
+        return function(user_found,*args,**kwargs)
+    return wrapper
+
 def check_auth(function):
     @wraps(function)
     def wrapper(*args,**kwargs):

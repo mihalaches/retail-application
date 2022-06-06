@@ -1,10 +1,12 @@
 from application.app import app
 from flask import render_template, request
 from orders.OrdersRepository import OrdersRepository
+from libs.token import check_admin_auth
 
 
 @app.route("/admin/orders",methods=['GET','POST'])
-def view_orders():
+@check_admin_auth
+def view_orders(user):
     order_repo = OrdersRepository()
     all_orders = order_repo.get_all()
     all_orders.sort(key = lambda x : x.ordered_date, reverse=True)
