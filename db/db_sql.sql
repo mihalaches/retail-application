@@ -42,7 +42,8 @@ CREATE TABLE "products" (
   "product_price" decimal NOT NULL,
   "guaranty" timestamp NOT NULL,
   "product_details" varchar(255) NOT NULL,
-  "product_image" varchar(500) NOT NULL
+  "product_image" varchar(500) NOT NULL,
+  "disabled" int NOT NULL default 0
 );
 
 CREATE TABLE "customers_orders" (

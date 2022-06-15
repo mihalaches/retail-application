@@ -22,4 +22,5 @@ def view_orders(user):
             start = (page-1) * step
             stop = start + step
             all_orders = all_orders[start:stop]
+    print(all_orders)
     return render_template("admin_orders.html",orders = all_orders, pages = (orders_lengts // 7)+1, user = user)

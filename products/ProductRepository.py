@@ -11,7 +11,7 @@ class ProductRepository:
         self.cursor = self.dbh.get_cursor()
 
     def get_all(self):
-        query = "SELECT products.id,products_category.category_name,products.product_name,products.product_price,products.guaranty,products.product_details,products.product_image FROM products INNER JOIN products_category ON products_category.id = products.product_category"
+        query = "SELECT products.id,products_category.category_name,products.product_name,products.product_price,products.guaranty,products.product_details,products.product_image FROM products INNER JOIN products_category ON products_category.id = products.product_category WHERE products.disabled = '0'"
         self.cursor.execute(query)
         data_fetch = self.cursor.fetchall()
         list_products = []
@@ -67,6 +67,23 @@ class ProductRepository:
         self.dbh.do_commit()
         return True
 
+    def delete(self, pid):
+        query = """
+            UPDATE
+                products
+            SET
+                disabled = '1'
+            WHERE
+                id = %s
+        """
+        try:
+            self.cursor.execute(query, (pid,))
+        except Exception as ex:
+            print(ex.args)
+            return False
+        self.dbh.do_commit()
+        return True
+
     def delete_cart_products_by_cid(self, cid, ordered = None):
         query = """
             UPDATE
@@ -98,7 +115,7 @@ class ProductRepository:
         return True
 
     def sort_by_category(self, category_name):
-        query = "SELECT products.id,products_category.category_name,products.product_name,products.product_price,products.guaranty,products.product_details,products.product_image FROM products INNER JOIN products_category ON products_category.id = products.product_category WHERE products_category.category_name = %s"
+        query = "SELECT products.id,products_category.category_name,products.product_name,products.product_price,products.guaranty,products.product_details,products.product_image FROM products INNER JOIN products_category ON products_category.id = products.product_category WHERE products_category.category_name = %s AND products.disabled = '0'"
         self.cursor.execute(query,(category_name,))
         data_fetch = self.cursor.fetchall()
         list_products = []

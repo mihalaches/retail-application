@@ -1,3 +1,4 @@
+import imp
 from flask import Flask
 
 app = Flask(__name__)
@@ -18,3 +19,4 @@ from admin.view_orders import view_orders
 from admin.login import login_admin
 from admin.logout import logout_admin
 from admin.all_users import all_users
+from admin.all_products import all_products
