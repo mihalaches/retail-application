@@ -15,3 +15,6 @@ from products.products_list import products_list
 from products.test_product import test
 from products.carts import cart
 from admin.view_orders import view_orders
+from admin.login import login_admin
+from admin.logout import logout_admin
+from admin.all_users import all_users

@@ -20,8 +20,8 @@ class UserRepository:
         for element in data_fetch:
             list_users.append(Users(element['cid'],element['email'],element['role_name'],element['first_name'],element['last_name'],
             element['password'],element['registered_date'],
-            element['country'],element['phone_number'], element['vat'],element['amount']))
-        print(list_users)
+            element['country'],element['phone_number'], element['vat'],element['amount'],None))
+        list_users.sort(key=lambda user : user.cid)
         return list_users
 
     def add_user(self,email,first_name,last_name,password,country,phone_number):
@@ -88,6 +88,25 @@ class UserRepository:
             print(ex.args)
             return False
         self.dbh.do_commit()
-        print(cid,new_amount)
-        print("assdasdaasd")
         return True
+
+    def update_user(self,param,cid,value):
+        query = "UPDATE customers SET {} = %s WHERE cid = %s".format(param)
+        try:
+            self.cursor.execute(query,(value,cid))
+        except Exception as ex:
+            print(ex.args)
+            return False
+        self.dbh.do_commit()
+        return True
+
+    def delete(self,cid):
+        query = "DELETE FROM customers WHERE cid = %s"
+        try:
+            self.cursor.execute(query,(cid,))
+        except Exception as ex:
+            print(ex.args)
+            return False
+        self.dbh.do_commit()
+        return True
+

@@ -8,3 +8,4 @@ class Messages:
     NO_MONEY_ACCOUNT = "No money in the account! Please top up!"
     SUCCESS_ORDER = "Order sent! New deposit amount : {new_deposit_amount} $"
     EMPTY_CART = "Your cart was deleted!"
+    NO_ADMIN_ACCOUT = "This account is not an admin account! Please try again!"

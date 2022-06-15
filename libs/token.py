@@ -14,16 +14,16 @@ def check_admin_auth(function):
     def wrapper(*args,**kwargs):
         if not session.get("token"):
             session.clear()
-            return redirect(url_for('adminlogin'))
+            return redirect(url_for('login_admin'))
         if not jwt_token.check_valability(session.get('token')):
             session.clear()
-            return redirect(url_for('adminlogin'))
+            return redirect(url_for('login_admin'))
         decoded_token = jwt_token.decode(session['token'])
         user_found = user_repo.get_user("cid",decoded_token['cid'])
         if not user_found:
-            return redirect(url_for('adminlogin')) 
+            return redirect(url_for('login_admin')) 
         if user_found.role != "ADMIN":
-            return redirect(url_for('adminlogin')) 
+            return redirect(url_for('login_admin')) 
         return function(user_found,*args,**kwargs)
     return wrapper
 
@@ -52,7 +52,20 @@ def no_login_req(function):
         except:
             user_found = None
         if session.get("token") and user_found:
-            return redirect(url_for("get_all_users"))
+            return redirect(url_for("products_list"))
+        return function(*args,**kwargs)
+    return wrapper
+
+def no_login_req_admin(function):
+    @wraps(function)
+    def wrapper(*args,**kwargs):
+        try:
+            decoded_token = jwt_token.decode(session['token'])
+            user_found = user_repo.get_user("cid",decoded_token['cid'])
+        except:
+            user_found = None
+        if session.get("token") and user_found:
+            return redirect(url_for("view_orders"))
         return function(*args,**kwargs)
     return wrapper
 
