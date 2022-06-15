@@ -125,3 +125,25 @@ class ProductRepository:
                                               prod['product_details'], prod['product_image'], "Undef"))
             return list_products
         return None
+
+    def get_product_category(self):
+        query = "SELECT * FROM products_category"
+        self.cursor.execute(query)
+        return self.cursor.fetchall()
+
+    def add_new_category(self,product_category):
+        query = """
+            INSERT INTO
+                products_category(
+                    category_name
+                )
+                VALUES
+                (%s)
+        """
+        try:
+            self.cursor.execute(query, (product_category,))
+        except Exception as ex:
+            print(ex.args)
+            return False
+        self.dbh.do_commit()
+        return True

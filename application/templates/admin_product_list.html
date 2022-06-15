@@ -18,6 +18,10 @@
             padding: 8px;
             color: #ccc;
         }
+        .center_div{
+            margin: 0 auto;
+            text-align: center;
+        }
     </style>
 </head>
 <script>
@@ -28,22 +32,36 @@
     function set_modal_value(product_id, product_name, product_cate, product_price, product_gua, product_details, producat_img) {
         document.getElementById("prod_id").value = product_id;
         document.getElementById("prod_name").setAttribute('value', product_name);
-        document.getElementById("prod_cate").setAttribute('value', product_cate);
+        let option_to_select = document.getElementById("prod_cate");
+        let index = 0;
+        for (let x of option_to_select) {
+            if (x.value === product_cate) {
+                option_to_select.selectedIndex = index;
+            }
+            index++;
+        }
         document.getElementById("prod_price").value = product_price
         date_new = product_gua.split(" ")
         new_str_date = date_new[0] + "T" + date_new[1]
         document.getElementById("prod_gua").defaultValue = new_str_date;
-        console.log(product_gua)
         document.getElementById("prod_details").value = product_details;
         document.getElementById("prod_img_1").src = producat_img;
     }
+
+
 </script>
 
 <body>
 
-    <center> <br><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalAddNewProd">Add
-            new product!</button> <br>
-    </center>
+
+    <div class="center_div">
+        <div class="btn-group" style="padding: 20px;"> <br><button type="button" class="btn btn-primary" data-toggle="modal"
+            data-target="#modalAddNewProd">Add
+            new product!</button> <br> <br><button type="button" class="btn btn-primary" data-toggle="modal"
+            data-target="#modalAddNewCategory" style="margin-left: 20px;">Add
+            new product category!</button>
+    </div>
+    </div>
     <span class="counter pull-right"></span>
     <table class="table table-hover table-bordered results">
         <thead>
@@ -109,7 +127,11 @@
                             <label for="prod_name">Product name</label>
                             <input type="text" id="prod_name" name="new_prod_name"><br>
                             <label for="prod_cate">Product category</label>
-                            <input type="text" id="prod_cate" name="new_prod_cate"><br>
+                            <select name="new_prod_cate" id="prod_cate">
+                                {% for prod_c in prod_category %}
+                                <option>{{prod_c.category_name}}</option>
+                                {% endfor %}
+                            </select><br>
                             <label for="prod_price">Product Price</label>
                             <input type="number" id="prod_price" step=".01" name="new_prod_price"><br>
                             <label for="prod_gua">Product Guaranty</label>
@@ -119,13 +141,13 @@
                             <label for="prod_img">Product Image</label>
                             <img src="" width="45" height="45" id="prod_img_1">
                             <input type="file" id="prod_img" name="new_prod_img"><br>
-                    
+
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        
-                            <button type="submit" class="btn btn-primary" name="update_prod" id="prod_id">Save
-                                changes</button>
+
+                        <button type="submit" class="btn btn-primary" name="update_prod" id="prod_id">Save
+                            changes</button>
                         </form>
                     </div>
                 </div>
@@ -145,12 +167,39 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        ---
+                        Add new product
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                         <form method="POST">
                             <button type="submit" class="btn btn-primary" name="update_prod" id="prod_id">Save
+                                changes</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Modal -->
+        <div class="modal fade" id="modalAddNewCategory" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Add new product category</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form method="POST">
+                    <div class="modal-body">
+                        <label for="new_product_category_to_add">Name of the new category:</label>
+                        <input type="text" name="prod_category_value" required>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary" name="add_new_prod_category" id="add_new_prod_category">Save
                                 changes</button>
                         </form>
                     </div>
