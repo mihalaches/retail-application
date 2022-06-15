@@ -15,4 +15,7 @@ def all_products(user):
             data_deleted = prod_repo.delete(request.form['delete_product'])
             if data_deleted:
                 return redirect(request.url)
+        if not request.form['new_prod_img']:
+            print("sadsa")
+        
     return render_template(template, user=user, all_prods = all_prods)
