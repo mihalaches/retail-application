@@ -123,7 +123,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form method="POST">
+                        <form method="POST" enctype=multipart/form-data>
                             <label for="prod_name">Product name</label>
                             <input type="text" id="prod_name" name="new_prod_name"><br>
                             <label for="prod_cate">Product category</label>
@@ -135,7 +135,7 @@
                             <label for="prod_price">Product Price</label>
                             <input type="number" id="prod_price" step=".01" name="new_prod_price"><br>
                             <label for="prod_gua">Product Guaranty</label>
-                            <input type="datetime-local" id="prod_gua" name="new_prod_hua"><br>
+                            <input type="datetime-local" id="prod_gua" name="new_prod_gua"><br>
                             <label for="prod_details">Product Details</label>
                             <textarea id="prod_details" name="new_prod_details"></textarea><br>
                             <label for="prod_img">Product Image</label>
@@ -167,12 +167,27 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        Add new product
+                        <form method="POST" enctype=multipart/form-data>
+                        <label for="prod_name">Product name</label>
+                        <input type="text" id="prod_name" name="new_prod_name" required><br>
+                        <label for="prod_cate">Product category</label>
+                        <select name="new_prod_cate" id="prod_cate">
+                            {% for prod_c in prod_category %}
+                            <option>{{prod_c.category_name}}</option>
+                            {% endfor %}
+                        </select><br>
+                        <label for="prod_price">Product Price</label>
+                        <input type="number" id="prod_price" step=".01" name="new_prod_price" required><br>
+                        <label for="prod_gua">Product Guaranty</label>
+                        <input type="datetime-local" id="prod_gua" name="new_prod_gua" required><br>
+                        <label for="prod_details">Product Details</label>
+                        <textarea id="prod_details" name="new_prod_details" required></textarea><br>
+                        <label for="prod_img">Product Image</label>
+                        <input type="file" id="prod_img" name="new_prod_img" required><br>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <form method="POST">
-                            <button type="submit" class="btn btn-primary" name="update_prod" id="prod_id">Save
+                            <button type="submit" class="btn btn-primary" name="add_new_product" id="prod_id">Save
                                 changes</button>
                         </form>
                     </div>

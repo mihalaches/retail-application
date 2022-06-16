@@ -16,65 +16,77 @@
             data_txt.textContent = data_to_write
         }
     </script>
+    <style>
+        .center_div {
+            margin: 0 auto;
+            text-align: center;
+        }
+    </style>
 </head>
 
 <body>
     Sort by: {{sorty_by}}
-    <br>
-    {% if products %}
-    {% for product in products %}
-    <form method="POST" class="object_form">
-        <div class="object">
-            <div style="text-align: center; margin: 5px; border: solid 1px black;">
-                <b>Product category :</b> <a href="/products?category={{product.product_category}}"
-                    class="badge badge-info mr-4"> {{product.product_category}} </a>
-                <br>
-                <b>Product name :</b> <span class="badge badge-info mr-4"> {{product.product_name}} </span></center>
-                <br>
-                <b>Guaranty : </b><span class="badge badge-info mr-4"> {{product.guaranty}} </span></center>
-
-            </div>
-            <div class="img_div">
-                <img src="{{product.product_image}}" width="300px" height="200">
-            </div>
-            <center> Price : <span class="badge badge-danger mr-4"> {{product.product_price}}$</span></center>
-            <br>
-            <p style="text-align:center;">Quantity:<input type="number" value="1" style="width: 20%;" min="1"
-                    name="quantity"></p>
-            <div style="margin-left: 10px; text-align: center; margin-bottom: 10px;">
-                <button type="submit" class="btn btn-primary" value="{{product.pid}}" name="product_id"><i
-                        class="icon-shopping-cart"></i> Add to cart</button>
-
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg"
-                    onclick="writeInModal({{product.pid}})">
-                    <i class="icon-info"></i> View product info
-                </button>
-            </div>
-        </div>
+    <form method="POST">
+    <div class="center_div">
+        <div class="btn-group" style="padding: 20px;"> <br><button type="submit" class="btn btn-primary" name="sort_asc">Sort by price ASC</button> <br> <br>
+                <button type="submit" class="btn btn-primary" style="margin-left: 20px;" name="sort_desc">Sort by price DESC</button>
+    </div>
     </form>
-    {% endfor %}
+        <br>
+        {% if products %}
+        {% for product in products %}
+        <form method="POST" class="object_form">
+            <div class="object">
+                <div style="text-align: center; margin: 5px; border: solid 1px black;">
+                    <b>Product category :</b> <a href="/products?category={{product.product_category}}"
+                        class="badge badge-info mr-4"> {{product.product_category}} </a>
+                    <br>
+                    <b>Product name :</b> <span class="badge badge-info mr-4"> {{product.product_name}} </span></center>
+                    <br>
+                    <b>Guaranty : </b><span class="badge badge-info mr-4"> {{product.guaranty}} </span></center>
 
-    {% endif %}
-    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Info - {product_name}</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
+                </div>
+                <div class="img_div">
+                    <img src="{{product.product_image}}" width="300px" height="200">
+                </div>
+                <center> Price : <span class="badge badge-danger mr-4"> {{product.product_price}}$</span></center>
+                <br>
+                <p style="text-align:center;">Quantity:<input type="number" value="1" style="width: 20%;" min="1"
+                        name="quantity"></p>
+                <div style="margin-left: 10px; text-align: center; margin-bottom: 10px;">
+                    <button type="submit" class="btn btn-primary" value="{{product.pid}}" name="product_id"><i
+                            class="icon-shopping-cart"></i> Add to cart</button>
+
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg"
+                        onclick="writeInModal({{product.pid}})">
+                        <i class="icon-info"></i> View product info
                     </button>
                 </div>
-                <div class="modal-body">
-                    More info here about the product : {product_name} - {product_category}
-                    <p id="product_info"></p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </form>
+        {% endfor %}
+
+        {% endif %}
+        <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Info - {product_name}</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        More info here about the product : {product_name} - {product_category}
+                        <p id="product_info"></p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
 
 </body>

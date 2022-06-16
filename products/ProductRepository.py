@@ -19,6 +19,7 @@ class ProductRepository:
             for prod in data_fetch:
                 list_products.append(Products(prod['id'], prod['product_name'], prod['category_name'], prod['product_price'], prod['guaranty'],
                                               prod['product_details'], prod['product_image'], "Undef"))
+            list_products.sort(key = lambda prod : prod.pid)
             return list_products
         return None
 
@@ -76,8 +77,17 @@ class ProductRepository:
             WHERE
                 id = %s
         """
+        query_cart = """
+            UPDATE 
+                customers_orders
+            SET
+                active = '0'
+            WHERE
+                products = %s
+        """
         try:
             self.cursor.execute(query, (pid,))
+            self.cursor.execute(query_cart, (pid,))
         except Exception as ex:
             print(ex.args)
             return False
@@ -147,3 +157,72 @@ class ProductRepository:
             return False
         self.dbh.do_commit()
         return True
+    
+    def get_category_id_by_name(self,category_name):
+        query = "SELECT id FROM products_category WHERE category_name = %s"
+        self.cursor.execute(query,(category_name,))
+        return self.cursor.fetchone()['id']
+
+    def update(self,product_name,product_category,product_price,product_guaranty,product_details,product_id,product_image=None):
+        category_id = self.get_category_id_by_name(product_category)
+        if product_image:
+            query = """
+                UPDATE
+                    products
+                SET
+                    product_name = %s,
+                    product_category = %s,
+                    product_price = %s,
+                    guaranty = %s,
+                    product_details = %s,
+                    product_image = %s
+                WHERE
+                    id = %s
+            """
+        else:
+            query = """
+                UPDATE
+                    products
+                SET
+                    product_name = %s,
+                    product_category = %s,
+                    product_price = %s,
+                    guaranty = %s,
+                    product_details = %s
+                WHERE
+                    id = %s
+            """
+        try:
+            if product_image:
+                self.cursor.execute(query, (product_name,category_id,product_price,product_guaranty,product_details,product_image,product_id))
+            else:
+                self.cursor.execute(query, (product_name,category_id,product_price,product_guaranty,product_details,product_id))
+        except Exception as ex:
+            print(ex.args)
+            return False
+        self.dbh.do_commit()
+        return True
+
+    def add(self,product_name,product_category,product_price,product_guaranty,product_details,product_image):
+        category_id = self.get_category_id_by_name(product_category)
+        query = """
+            INSERT INTO
+                products(
+                    product_name,
+                    product_category,
+                    product_price,
+                    guaranty,
+                    product_details,
+                    product_image
+                )
+                VALUES
+                (%s,%s,%s,%s,%s,%s)
+        """
+        try:
+            self.cursor.execute(query, (product_name,category_id,product_price,product_guaranty,product_details,product_image,))
+        except Exception as ex:
+            print(ex.args)
+            return False
+        self.dbh.do_commit()
+        return True
+        
