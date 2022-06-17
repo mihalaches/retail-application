@@ -12,6 +12,7 @@ from users.get_all_users import get_all_users
 from users.add_new_user import add_new_user
 from users.login import login
 from users.logout import logout
+from users.reset_password import resetpass
 from products.products_list import products_list
 from products.test_product import test
 from products.carts import cart

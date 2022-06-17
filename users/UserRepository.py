@@ -110,3 +110,14 @@ class UserRepository:
         self.dbh.do_commit()
         return True
 
+    def update_password(self,cid,new_password):
+        query = "UPDATE customers SET password = %s WHERE cid = %s"
+        hash_pwd = bcrypt.hashpw(new_password.encode("utf-8"),bcrypt.gensalt()).decode("utf-8")
+        try:
+            self.cursor.execute(query,(hash_pwd,cid))
+        except Exception as ex:
+            print(ex.args)
+            return False
+        self.dbh.do_commit()
+        return True
+

@@ -2,6 +2,7 @@ from application.app import app
 from libs.token import check_admin_auth
 from flask import redirect, render_template, request
 from users.UserRepository import UserRepository
+from libs.reset_password import reset_password
 
 @app.route("/admin/users",methods=["GET","POST"])
 @check_admin_auth
@@ -42,5 +43,8 @@ def all_users(user):
             updated_value = user_repo.delete(request.form['delete_user'])
             if updated_value:
                 return redirect(request.url)
+        if "send_reset_key" in request.form:
+            url = request.root_url + "/resetpass"
+            reset_password.send_reset_token(request.form['send_reset_key'],url,"token")
 
     return render_template(template,user=user,all_users = all_users)

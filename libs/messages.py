@@ -9,3 +9,6 @@ class Messages:
     SUCCESS_ORDER = "Order sent! New deposit amount : {new_deposit_amount} $"
     EMPTY_CART = "Your cart was deleted!"
     NO_ADMIN_ACCOUT = "This account is not an admin account! Please try again!"
+    RESET_PASSWORD_MAIL_SEND = "EMAIL WITH THE INSTRUCTIONS OF RESET PASSWORD WAS SENT!"
+    RESET_MAIL_CONTENT = "To reset you password please follow the next link : {link_reset}"
+    RESET_MAIL_SUBJECT = "Reset password"

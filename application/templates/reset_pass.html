@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Reset password</title>
+</head>
+<body>
+    {% if not data.set_pass_page %}
+    <form method="POST">
+    <input type="email" name="email">
+    <input type="submit">
+    </form>
+    {% if data.data_reset %}
+    {{data.data_reset}}
+    {% endif %}
+    {% else %}
+    <form method="POST">
+        <label for="password">Password:</label>
+        <input type="password" name="password" id="password">
+        <label for="cpassword">Confirm Password:</label>
+        <input type="password" name="cpassword" id="cpassword">
+        <input type="submit">
+        </form>
+        {% if data.data_reset %}
+        {{data.data_reset}}
+        {% endif %}
+    {% endif %}
+</body>
+</html>
