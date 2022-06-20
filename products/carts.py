@@ -12,9 +12,19 @@ def cart(user):
     product_repo = ProductRepository()
     user_repository = UserRepository()
     total_price = 0
+    address = user_repository.check_customer_address(user.cid)
+    print(address)
     for element in user.cart:
         total_price += element.product_price
     if request.method == "POST":
+        if not address:
+            country = request.form['address_country']
+            city = request.form['address_city']
+            phone_number = request.form['address_phone_number']
+            full_address = request.form['full_address']
+            if "add_address" in request.form:
+                user_repository.add_address(user.cid,country,city,phone_number,full_address)
+                return redirect(request.url)
         if 'remove' in request.form:
             cart_p_id = int(request.form['remove'])
             product_repo.delete_from_cart(cart_p_id)
@@ -36,4 +46,4 @@ def cart(user):
                     product_repo.delete_cart_products_by_cid(
                         user.cid, ordered=True)
                     return redirect(request.url)
-    return render_template("cart.html", user=user.serialize(), total_price=total_price)
+    return render_template("cart.html", user=user.serialize(), total_price=total_price,address = address)

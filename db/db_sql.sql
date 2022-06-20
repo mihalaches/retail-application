@@ -16,7 +16,8 @@ CREATE TABLE "customers" (
   "registered_date" timestamp NOT NULL,
   "country" varchar(255) NOT NULL,
   "phone_number" varchar(255) NOT NULL,
-  "vat" decimal NOT NULL
+  "vat" decimal NOT NULL,
+  "active_token" int NOT NULL default 1
 );
 
 CREATE TABLE "deposit" (

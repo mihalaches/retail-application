@@ -14,6 +14,7 @@ class reset_password:
         user_exist = cls._user_repo.get_user("email", email)
         if not user_exist:
             return Messages.INVALID_EMAIL
+        cls._user_repo.update_user("active_token",user_exist.cid,'1')
         generated_token = jwt_token.encode(cid=user_exist.cid)
         url_created = url + "?{}=".format(path_param) + generated_token
         subject = Messages.RESET_MAIL_SUBJECT

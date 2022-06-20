@@ -1,6 +1,6 @@
 class Users:
 
-    def __init__(self,cid,email,role,first_name,last_name,password,registered_date,country,phone_number,vat,deposit,cart):
+    def __init__(self,cid,email,role,first_name,last_name,password,registered_date,country,phone_number,vat,deposit,cart,active_token):
         self._cid = cid
         self._email = email
         self._role = role
@@ -13,6 +13,7 @@ class Users:
         self._vat = vat
         self._deposit = deposit
         self._cart = cart
+        self._active_token = active_token
 
     @property
     def cid(self):
@@ -109,6 +110,14 @@ class Users:
     @cart.setter
     def cart(self,cart):
         self._cart = cart
+
+    @property
+    def active_token(self):
+        return self._active_token
+    
+    @active_token.setter
+    def active_token(self,active_token):
+        self._active_token = active_token
     
     def __str__(self) -> str:
         return "User cid : {}".format(self.cid)
@@ -128,7 +137,8 @@ class Users:
             "phone_number" : self.phone_number,
             "vat" : self.vat,
             "deposit" : self.deposit,
-            "cart" : self.cart
+            "cart" : self.cart,
+            "active_token" : self.active_token
         }                            
 
 

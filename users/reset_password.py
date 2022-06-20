@@ -18,15 +18,19 @@ def resetpass():
             return render_template(template,data = {"data_reset":"Invalid token","set_pass_page":False})
         if jwt_token.check_valability(token):
             if user_repo.get_user("cid",decoded_token.get("cid")):
-                if request.method == "POST":
-                    password = request.form['password']
-                    cpassword = request.form['cpassword']
-                    if password != cpassword:
-                        return render_template(template,data={"set_pass_page":True,"data_reset":"Confirm password must match password!"})
-                    data_updated = user_repo.update_password(decoded_token['cid'],password)
-                    if data_updated:
-                        return render_template(template,data = {"data_reset":"Password updated!","set_pass_page":False})
-                return render_template(template,data={"set_pass_page":True})
+                actual_user = user_repo.get_user("cid",decoded_token['cid'])
+                if actual_user.active_token:
+                    if request.method == "POST":
+                        password = request.form['password']
+                        cpassword = request.form['cpassword']
+                        if password != cpassword:
+                            return render_template(template,data={"set_pass_page":True,"data_reset":"Confirm password must match password!"})
+                        data_updated = user_repo.update_password(decoded_token['cid'],password)
+                        if data_updated:
+                            return render_template(template,data = {"data_reset":"Password updated!","set_pass_page":False})
+                    return render_template(template,data={"set_pass_page":True})
+                else:
+                    return render_template(template,data = {"data_reset":"Invalid token","set_pass_page":False})
         else:
             return render_template(template,data = {"data_reset":"Invalid token","set_pass_page":False})
     if request.method == "POST":

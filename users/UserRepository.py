@@ -20,7 +20,7 @@ class UserRepository:
         for element in data_fetch:
             list_users.append(Users(element['cid'],element['email'],element['role_name'],element['first_name'],element['last_name'],
             element['password'],element['registered_date'],
-            element['country'],element['phone_number'], element['vat'],element['amount'],None))
+            element['country'],element['phone_number'], element['vat'],element['amount'],None, element['active_token']))
         list_users.sort(key=lambda user : user.cid)
         return list_users
 
@@ -77,7 +77,7 @@ class UserRepository:
         if data_fetch:
             return Users(data_fetch['cid'],data_fetch['email'],data_fetch['role_name'],data_fetch['first_name'],
                     data_fetch['last_name'],data_fetch['password'],data_fetch['registered_date'],data_fetch['country'],
-                    data_fetch['phone_number'], data_fetch['vat'],data_fetch['amount'],list_products)
+                    data_fetch['phone_number'], data_fetch['vat'],data_fetch['amount'],list_products, data_fetch['active_token'])
         return None
 
     def update_deposit(self,cid,new_amount):
@@ -111,7 +111,7 @@ class UserRepository:
         return True
 
     def update_password(self,cid,new_password):
-        query = "UPDATE customers SET password = %s WHERE cid = %s"
+        query = "UPDATE customers SET password = %s,active_token='0' WHERE cid = %s"
         hash_pwd = bcrypt.hashpw(new_password.encode("utf-8"),bcrypt.gensalt()).decode("utf-8")
         try:
             self.cursor.execute(query,(hash_pwd,cid))
@@ -121,3 +121,37 @@ class UserRepository:
         self.dbh.do_commit()
         return True
 
+    def check_customer_address(self,cid):
+        query = "SELECT * FROM customers_address WHERE user_cid = %s"
+        try:
+            self.cursor.execute(query,(cid,))
+        except Exception as ex:
+            print(ex.args)
+            return False
+        return self.cursor.fetchone()
+
+    def add_address(self,cid,country,city,phone_number,full_address):
+        query = """
+            INSERT INTO
+                customers_address(
+                    user_cid,
+                    country,
+                    city,
+                    phone_number,
+                    full_address
+                )
+                VALUES(
+                    %s,
+                    %s,
+                    %s,
+                    %s,
+                    %s
+                )
+        """
+        try:
+            self.cursor.execute(query,(cid,country,city,phone_number,full_address))
+        except Exception as ex:
+            print(ex.args)
+            return False
+        self.dbh.do_commit()
+        return True

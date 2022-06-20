@@ -12,6 +12,9 @@
 
 <body>
     <center>
+        {% if address %}
+        This order will be sent to the next address: Country : {{address.country}}  /  City : {{address.city}}  / Phone number: {{address.phone_number}}  /  Full address: {{address.full_address}}
+        {% endif %}
         <table>
             <thead>
                 <th>Options</th>
@@ -41,9 +44,14 @@
                 <td></td>
                 <td>{{total_price}}$</td>
                 <form method="POST">
+                    {% if address %}
                     <td><button type="submit" class="btn btn-primary" name="send_order"><i
                                 class="icon-shopping-cart"></i> Send order</button></td>
-                </form>
+                    </form>
+                    {% else %}
+                    <td><button type="button" class="btn btn-primary" name="open_modal" data-toggle="modal" data-target="#addAddress"><i
+                        class="icon-shopping-cart"></i> Send order</button></td>
+                    {% endif %}
                 <form method="POST">
                     <td><button type="submit" class="btn btn-danger" name="empty_cart"><i
                                 class="icon-shopping-cart"></i> Empty cart</button></td>
@@ -61,5 +69,39 @@
         {% endif %}
         {% endwith %}
     </center>
+    <form method="POST">
+        <!-- Modal -->
+        <div class="modal fade" id="addAddress" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Update product</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form method="POST" enctype=multipart/form-data>
+                            <label for="country">Country</label>
+                            <input type="text" id="country" name="address_country"><br>
+                            <label for="city">City</label>
+                            <input type="text" id="city" name="address_city"><br>
+                            <label for="phone_number">Phone number</label>
+                            <input type="tel" id="phone_number" name="address_phone_number"><br>
+                            <label for="full_address">Full address</label>
+                            <input type="text" id="full_address" name="full_address"></textarea><br>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+                        <button type="submit" class="btn btn-primary" name="add_address" id="user_id">Add address</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
 </body>
 {% endblock %}

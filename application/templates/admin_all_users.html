@@ -54,6 +54,7 @@
     <thead>
         <tr>
             <th class="col-md-1 col-xs-1">CID</th>
+            <th class="col-md-1 col-xs-1">Email</th>
             <th class="col-md-1 col-xs-1">First Name</th>
             <th class="col-md-1 col-xs-1">Last Name</th>
             <th class="col-md-2 col-xs-2">Role</th>
@@ -71,6 +72,7 @@
     <tbody>
         <tr>
             <th scope="row">{{user.cid}}</th>
+            <th scope="row">{{user.email}}</th>
             <form method="POST">
                 <td><input type="text" value="{{user.first_name}}" style="width: 100px;" name="value"> <br> <button type="submit"
                         class="badge badge-primary mr-4" name="change_first_name" value="{{user.cid}}">Modify</button>
