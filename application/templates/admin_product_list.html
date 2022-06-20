@@ -110,6 +110,7 @@
                 <td colspan="4"><i class="fa fa-warning"></i> No result</td>
             </tr>
         </thead>
+        {% if all_prods %}
         {% for product in all_prods %}
         <tbody>
             <td>{{product.pid}}</td>
@@ -141,6 +142,7 @@
             </form>
         </tbody>
         {% endfor %}
+        {% endif %}
 
         <!-- Modal -->
         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
