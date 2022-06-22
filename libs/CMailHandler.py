@@ -1,12 +1,17 @@
 import smtplib, ssl
+import os
+from dotenv import find_dotenv, load_dotenv
+
+load_dotenv(find_dotenv())
 
 class CMailHandler:
 
     def __init__(self):
         self.port = 465
-        self.smtp_server_domain_name = "smtp.gmail.com"
-        self.sender_mail = "mihalachesebi06@gmail.com"
-        self.password = "vricepwonpiumbjx"
+        self.smtp_server_domain_name = os.environ.get("SMTP_SERVER_NAME")
+        self.sender_mail = os.environ.get("MAIL_SENDER")
+        self.password = os.environ.get("MAIL_PASSWORD")
+        print(type(self.password))
 
     def send(self, emails, subject, content):
         recieve = emails
