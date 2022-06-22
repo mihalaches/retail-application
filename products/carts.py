@@ -13,10 +13,14 @@ def cart(user):
     user_repository = UserRepository()
     total_price = 0
     address = user_repository.check_customer_address(user.cid)
-    print(address)
     for element in user.cart:
         total_price += element.product_price
     if request.method == "POST":
+        if "delete_address" in request.form:
+            print(request.form['delete_address'])
+            address_deleted = user_repository.delete_address(request.form['delete_address'])
+            if address_deleted:
+                return redirect(request.url)
         if not address:
             country = request.form['address_country']
             city = request.form['address_city']

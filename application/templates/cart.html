@@ -13,7 +13,7 @@
 <body>
     <center>
         {% if address %}
-        This order will be sent to the next address: Country : {{address.country}}  /  City : {{address.city}}  / Phone number: {{address.phone_number}}  /  Full address: {{address.full_address}}
+        This order will be sent to the next address: Country : {{address.country}}  /  City : {{address.city}}  / Phone number: {{address.phone_number}}  /  Full address: {{address.full_address}} <form method="POST"><button type="submit" class="btn btn-danger" name="delete_address" value="{{user.cid}}">Delete address</button></form>
         {% endif %}
         <table>
             <thead>

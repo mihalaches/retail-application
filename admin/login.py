@@ -26,3 +26,8 @@ def login_admin():
             return render_template(template,data = {"no_admin":True, "message":Messages.NO_ADMIN_ACCOUT})
         return render_template(template,data = {"invalid_email":True,"message":Messages.INVALID_EMAIL})
     return render_template(template,data ="")
+
+
+@app.route("/",methods=["GET"])
+def default_route():
+    return redirect(url_for("login"))

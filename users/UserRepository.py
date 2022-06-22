@@ -155,3 +155,18 @@ class UserRepository:
             return False
         self.dbh.do_commit()
         return True
+    
+    def delete_address(self,cid):
+        query = """
+            DELETE FROM
+                customers_address
+            WHERE
+                user_cid = %s
+        """
+        try:
+            self.cursor.execute(query,(cid,))
+        except Exception as ex:
+            print(ex.args)
+            return False
+        self.dbh.do_commit()
+        return True
