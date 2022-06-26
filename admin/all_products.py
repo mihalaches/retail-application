@@ -5,7 +5,7 @@ from products.ProductRepository import ProductRepository
 from werkzeug.utils import secure_filename
 import os
 
-UPLOAD_FOLDER = 'application\static'
+UPLOAD_FOLDER = 'application/static'
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif', 'jfif'}
 
 
