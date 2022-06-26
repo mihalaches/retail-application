@@ -24,3 +24,5 @@
 # HOW TO START THE APP
 
 * RUN sh start_app.sh from \licenta_cristina\start_app.sh
+
+* HOST_NAME = pg_container
