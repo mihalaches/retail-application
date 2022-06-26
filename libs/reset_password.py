@@ -3,7 +3,7 @@ from libs.token import jwt_token
 from libs.messages import Messages
 from libs.CMailHandler import CMailHandler
 from libs.messages import Messages
-
+import threading
 
 class reset_password:
 
@@ -19,5 +19,6 @@ class reset_password:
         url_created = url + "?{}=".format(path_param) + generated_token
         subject = Messages.RESET_MAIL_SUBJECT
         content = Messages.RESET_MAIL_CONTENT.format(link_reset=url_created)
-        CMailHandler().send(email, subject, content)
+        thread = threading.Thread(target=CMailHandler().send,args=(email,subject,content))
+        thread.start()
         return Messages.RESET_PASSWORD_MAIL_SEND
